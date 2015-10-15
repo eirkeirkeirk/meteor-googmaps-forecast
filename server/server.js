@@ -6,10 +6,14 @@ Meteor.methods({
 		return HTTP.get("http://api.openweathermap.org/data/2.5/weather?q="+ city +"&APPID=APIKEY")
 	},*/
 
-/*	getWeather: function(zipcode){
-	console.log("I called the weather by zip code ", zipcode);
-	return HTTP.get("http://api.openweathermap.org/data/2.5/weather?zip="+ zipcode +",us&APPID=APIKEY")
-	},*/
+	getWeather: function(lat, lng) {
+		// console.log("I called the weather with ", lat, lng);
+		var apiUrl = "https://api.forecast.io/forecast/" + forecastKey + "/" + lat + "," + lng;
+		// console.log("made API call: ", apiUrl);
+		var weather = HTTP.get(apiUrl, {params: {data: "JSONP"}});
+		console.log("weather: ", weather);
+		return weather;
+	},
 
 /*	getTemperature: function(city){
 	console.log("searching for temperature in ", city);

@@ -1,4 +1,3 @@
-
 Template.mainlayout.helpers({
 	currentweather: function(){
 		var city = Session.get('city');
@@ -41,14 +40,24 @@ Template.mainlayout.helpers({
 	latLong: function() {
 		var location = Session.get('myLocation');
 
-		Meteor.call('getLatLong', location, function(err, results){
+		Meteor.call('getLatLong', location, function(err, results) {
 			var data = JSON.parse(results.content);
-			console.log("latitude = ",data.results[0].geometry.location.lat);
-			console.log("longitude = ",data.results[0].geometry.location.lng);
+			var lat = data.results[0].geometry.location.lat;
+			var lng = data.results[0].geometry.location.lng;
+			console.log("latitude = ", lat);
+			console.log("longitude = ", lng);
+			Meteor.call('getWeather', lat, lng, function(err, results) {
+				console.log("finished calling Meteor.getWeather()");
+				console.log("err", err);
+				// console.log("results", results.content.currently.temperature);
+				// console.log("results", results.content.currently);
+				var weather = JSON.parse(results.content)
+				console.log(weather.currently.temperature + " " + weather.currently.summary);
+			})
 
 			//console.log(results.content);
-			Session.set('lat', data.results[0].geometry.location.lat);
-			Session.set('lon', data.results[0].geometry.location.lng);
+			// Session.set('lat', data.results[0].geometry.location.lat);
+			// Session.set('lon', data.results[0].geometry.location.lng);
 		});
 
 	}
