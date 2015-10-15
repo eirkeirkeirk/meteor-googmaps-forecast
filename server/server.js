@@ -21,7 +21,7 @@ Meteor.methods({
 		// call google maps with location
 		// find lat and long in response object
 		// this is a GOOGLE api call, not a darksky call
-	return HTTP.get('https://maps.googleapis.com/maps/api/geocode/json?address='+ location +'&key=' + googKey);
+		return HTTP.get('https://maps.googleapis.com/maps/api/geocode/json?address='+ location +'&key=' + googKey);
 	}
 })
 
@@ -47,7 +47,7 @@ Meteor.methods({
 // 	getTemperature: function(city){
 // 	console.log("searching for temperature in ", city);
 // 	return HTTP.get("http://api.openweathermap.org/data/2.5/weather?q="+ city +"&APPID=2&units=imperial")
-// 	}		
+// 	}
 // })
 
   // https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
